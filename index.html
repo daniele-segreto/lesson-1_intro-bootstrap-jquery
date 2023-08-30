@@ -31,6 +31,7 @@
                 <!-- Form -->
                 <h1>Riempi e clicca</h1>
                 <p>daccordo?</p>
+                <div id="contenuto"></div>
                 <form>
                     <div class="mb-3">
                         <label for="InputText" class="form-label"></label>
@@ -71,31 +72,43 @@
                 // $("#target").append(nome).css("color", colore).css("font-size", grandezza);
                 
                 
-                // { minore 18 = minoenne ; 18-65 = età lavorativa - +65 goditi la pensione }
+                // { minore 18 = minoerenne ; 18-65 = età lavorativa - +65 goditi la pensione }
                 
                 $('#btn_inviodati').on('click', function() {
                     valore = $('#eta').val(); // prende il valore inserito dall'utente
                     var condizione = $.isNumeric(valore); // verifica se il valore inserito è un numero
                     // alert(valore);
+                    var contenuto1 = "<h1>Ehi, guarda che sei minorenne!</h1>";
+                    var contenuto2 = "<h1>Bene, sei in età lavorativa!</h1>";
+                    var contenuto3 = "<h1>Ottimo, sei in pensione!</h1>";
+                    var errore =  "<h1>Devi inserire un numero!</h1>";
+                    var sfondoV = "PaleGreen";
+                    var sfondoX = "LightCoral";
+                    var padding = "5px";
                     
                     if (condizione) {
                         alert('Ok! Procediamo al controllo del numero!')
                         if (valore < 18) {
                             alert('Sei minorenne')
+                            $('#contenuto').html(contenuto1).css("background", sfondoV).css("padding", padding);
                             return false;
                         }
                         
                         if (valore < 65) {
                             alert('Sei in età lavorativa')
+                            $('#contenuto').html(contenuto2).css("background", sfondoV).css("padding", padding);
                             return false;
                         }
                         
                         if (valore > 65) {
                             alert('Goditi la pensione!')
+                            $('#contenuto').html(contenuto3).css("background", sfondoV).css("padding", padding);
                             return false;
                         }
                     } else {
-                        alert('Inserisci un valore corrretto!')
+                        alert('Inserisci un valore corrretto!');
+                        $('#contenuto').html(errore).css("background", sfondoX).css("padding", padding);
+                        return false;
                     }
                 })
                 
